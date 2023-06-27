@@ -6,8 +6,11 @@ import {
   getUsers,
   updateUser,
 } from "./src/controllers/userController";
+import { config } from "dotenv";
 
-const PORT = 5000;
+config();
+
+const PORT = Number(process.env.ENV_PORT);
 
 const server = http.createServer(async (req, res) => {
   console.log(req.url);
