@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { users } from "../store";
+import { users, changeUsers } from "../store";
 import { IUser, UserWithoutId } from "../store.interface";
 
 export const getUserById = (id: string) => {
@@ -15,4 +15,20 @@ export const createUserService = (body: UserWithoutId) => {
   users.push(newUser);
 
   return newUser;
+};
+
+export const updateUserService = (body: UserWithoutId, id: string) => {
+  const newUsers = users.map((user) => {
+    if (user.id === id) {
+      return {
+        ...user,
+        ...body,
+      };
+    }
+    return user;
+  });
+
+  changeUsers(newUsers);
+
+  return users.find((user) => user.id === id);
 };

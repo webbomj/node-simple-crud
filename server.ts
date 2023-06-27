@@ -3,6 +3,7 @@ import {
   createUser,
   getUser,
   getUsers,
+  updateUser,
 } from "./src/controllers/userController";
 
 const PORT = 5000;
@@ -25,7 +26,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (path === "users" && req.method === "PUT" && userId) {
-    // todo update user
+    await updateUser(req, res, userId);
   }
 
   if (path === "users" && req.method === "DELETE" && userId) {

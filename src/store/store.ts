@@ -1,3 +1,7 @@
 import { IUser } from "./store.interface";
 
-export const users: IUser[] = [];
+export let users: IUser[] = [];
+
+export const changeUsers = (newUsers: IUser[]) => {
+  users = newUsers;
+};
