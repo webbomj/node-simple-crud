@@ -1,6 +1,7 @@
 import http from "node:http";
 import {
   createUser,
+  deleteUser,
   getUser,
   getUsers,
   updateUser,
@@ -30,7 +31,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (path === "users" && req.method === "DELETE" && userId) {
-    // todo delete user
+    deleteUser(req, res, userId);
   }
 });
 

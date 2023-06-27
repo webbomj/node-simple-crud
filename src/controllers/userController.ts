@@ -1,6 +1,7 @@
 import { getBody } from "../store/services/helpService";
 import {
   createUserService,
+  deleteUserById,
   getUserById,
   updateUserService,
 } from "../store/services/userService";
@@ -76,5 +77,27 @@ export const updateUser = async (req: Request, res: Response, id: string) => {
       res.write("record with id === userId doesn't exist");
       res.end();
     }
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response, id: string) => {
+  const validId = validate(id);
+
+  if (!validId) {
+    res.statusCode = 400;
+    res.write("userId is invalid");
+    res.end();
+  }
+
+  const result = getUserById(id);
+
+  if (result) {
+    deleteUserById(id);
+    res.statusCode = 204;
+    res.end();
+  } else {
+    res.statusCode = 404;
+    res.write("record with id === userId doesn't exist");
+    res.end();
   }
 };

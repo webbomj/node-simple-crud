@@ -32,3 +32,9 @@ export const updateUserService = (body: UserWithoutId, id: string) => {
 
   return users.find((user) => user.id === id);
 };
+
+export const deleteUserById = (id: string) => {
+  const newUsers = users.filter((user) => user.id !== id);
+
+  changeUsers(newUsers);
+};
