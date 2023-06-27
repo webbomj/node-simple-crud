@@ -1,5 +1,7 @@
-import { getUserById } from "../store/services/userService";
+import { getBody } from "../store/services/helpService";
+import { createUserService, getUserById } from "../store/services/userService";
 import { users } from "../store/store";
+import { UserWithoutId } from "../store/store.interface";
 import { Request, Response } from "./user.interface";
 import { validate } from "uuid";
 
@@ -27,5 +29,21 @@ export const getUser = (req: Request, res: Response, id: string) => {
     res.statusCode = 400;
     res.write(JSON.stringify("UserId invalid"));
     res.end();
+  }
+};
+
+export const createUser = async (req: Request, res: Response) => {
+  const body = await getBody<UserWithoutId>(req);
+
+  const { age, hobbies, username } = body;
+
+  if (age && hobbies && username && hobbies.length >= 0) {
+    const newUser = createUserService(body);
+    res.statusCode = 201;
+    res.write(JSON.stringify(newUser));
+    res.end();
+  } else {
+    res.statusCode = 400;
+    res.write("body does not contain required fields");
   }
 };

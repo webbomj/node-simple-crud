@@ -1,9 +1,13 @@
 import http from "node:http";
-import { getUser, getUsers } from "./src/controllers/userController";
+import {
+  createUser,
+  getUser,
+  getUsers,
+} from "./src/controllers/userController";
 
 const PORT = 5000;
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   console.log(req.url);
   const [api, path, userId] = req.url.slice(1).split("/");
   console.log(path);
@@ -13,6 +17,7 @@ const server = http.createServer((req, res) => {
   }
 
   if (path === "users" && req.method === "POST") {
+    await createUser(req, res);
   }
 
   if (path === "users" && req.method === "GET" && userId) {

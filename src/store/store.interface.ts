@@ -4,3 +4,5 @@ export interface IUser {
   age: string;
   hobbies: string[];
 }
+
+export type UserWithoutId = Omit<IUser, "id">;
