@@ -8,7 +8,9 @@ export const getUserById = (id: string) => {
 
 export const createUserService = (body: UserWithoutId) => {
   const newUser: IUser = {
-    ...body,
+    username: body.username,
+    age: body.age,
+    hobbies: body.hobbies,
     id: v4(),
   };
 
@@ -21,8 +23,10 @@ export const updateUserService = (body: UserWithoutId, id: string) => {
   const newUsers = users.map((user) => {
     if (user.id === id) {
       return {
-        ...user,
-        ...body,
+        id: user.id,
+        username: body.username,
+        age: body.age,
+        hobbies: body.hobbies,
       };
     }
     return user;
