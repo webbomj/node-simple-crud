@@ -1,4 +1,4 @@
-import http from "node:http";
+import { createServer } from "node:http";
 import {
   createUser,
   deleteUser,
@@ -12,10 +12,8 @@ config();
 
 const PORT = Number(process.env.ENV_PORT);
 
-const server = http.createServer(async (req, res) => {
-  console.log(req.url);
+const server = createServer(async (req, res) => {
   const [api, path, userId] = req.url.slice(1).split("/");
-  console.log(path);
 
   if (path === "users" && req.method === "GET" && !userId) {
     getUsers(req, res);
