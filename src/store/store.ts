@@ -1,3 +1,3 @@
-import { IStore } from "./store.interface";
+import { IUser } from "./store.interface";
 
-export const users: IStore[] = [];
+export const users: IUser[] = [];
