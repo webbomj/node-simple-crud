@@ -16,22 +16,17 @@ const server = http.createServer(async (req, res) => {
 
   if (path === "users" && req.method === "GET" && !userId) {
     getUsers(req, res);
-  }
-
-  if (path === "users" && req.method === "POST") {
+  } else if (path === "users" && req.method === "POST") {
     await createUser(req, res);
-  }
-
-  if (path === "users" && req.method === "GET" && userId) {
+  } else if (path === "users" && req.method === "GET" && userId) {
     getUser(req, res, userId);
-  }
-
-  if (path === "users" && req.method === "PUT" && userId) {
+  } else if (path === "users" && req.method === "PUT" && userId) {
     await updateUser(req, res, userId);
-  }
-
-  if (path === "users" && req.method === "DELETE" && userId) {
+  } else if (path === "users" && req.method === "DELETE" && userId) {
     deleteUser(req, res, userId);
+  } else {
+    res.statusCode = 404;
+    res.end("non-existing endpoints");
   }
 });
 
