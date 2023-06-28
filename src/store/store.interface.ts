@@ -1,7 +1,7 @@
 export interface IUser {
   id: string;
   username: string;
-  age: string;
+  age: string | number;
   hobbies: string[];
 }
 
